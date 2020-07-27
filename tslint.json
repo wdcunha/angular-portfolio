@@ -26,6 +26,7 @@
       true,
       "element",
       "app",
+      "events",
       "kebab-case"
     ],
     "eofline": true,

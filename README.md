@@ -1,6 +1,11 @@
-# AngularPortfolio
+# Angular Portfolio
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.4.
+
+Firebase project was created to be used for authentication purpose. It is just done in [Firebase console](https://console.firebase.google.com/).
+
+AngularFire is needed to be installed because it is the Firebase SDK: `ng add @angular/fire`
+
 
 ## Development server
 
