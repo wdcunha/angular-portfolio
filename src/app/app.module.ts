@@ -11,7 +11,7 @@ import {ContactComponent} from './contact/contact.component';
 import {AdminModule} from './admin/admin.module';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
-import {environment} from '../environments/environment';
+import {data} from '../environments/firebaseConfig';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,7 @@ import {environment} from '../environments/environment';
     BrowserModule,
     AppRoutingModule,
     AdminModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(data.firebaseConfig),
     AngularFireAuthModule
   ],
   providers: [],

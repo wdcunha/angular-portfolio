@@ -4,7 +4,22 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Firebase project was created to be used for authentication purpose. It is just done in [Firebase console](https://console.firebase.google.com/).
 
-AngularFire is needed to be installed because it is the Firebase SDK: `ng add @angular/fire`
+AngularFire is needed to be installed because it is the Firebase SDK: `ng add @angular/fire`.
+
+An important detail is about firebase config that contains access data for the project in the Firebase, that's why these data was added to a separate file inside [environment folder](src/environments/firebaseConfig.ts), but the attention is because it is being ignored by the gitignore, so if it is necessary to use in another, project, it has to be done manually.
+
+`export const environment = {
+   production: false,
+   firebaseConfig: {
+     apiKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     authDomain: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     databaseURL: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+     projectId: "xxxxxxxxxxxxx",
+     storageBucket: "xxxxxxxxxxxxxxx",
+     messagingSenderId: "xxxxxxxxxxxxxx",
+     appId: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   }
+ };`
 
 
 ## Development server
