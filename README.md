@@ -8,7 +8,6 @@ AngularFire is needed to be installed because it is the Firebase SDK: `ng add @a
 
 An important detail is about firebase config that contains access data for the project in the Firebase, that's why these data was added to a separate file inside [environment folder](src/environments/firebaseConfig.ts), but the attention is because it is being ignored by the gitignore, so if it is necessary to use in another, project, it has to be done manually.
 
-`
             export const environment = {
                production: false,
                firebaseConfig: {
@@ -21,8 +20,6 @@ An important detail is about firebase config that contains access data for the p
                  appId: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
                }
              };
- `
-
 
 ## Development server
 
