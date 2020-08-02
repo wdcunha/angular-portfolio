@@ -5,18 +5,19 @@ import {ProjectCreateComponent} from './project-create-component/project-create.
 import {ProjectUpdateComponent} from './project-update-component/project-update.component';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
+import {AdminGuard} from './admin.guard';
 
 const routes: Routes = [
   {
     path: 'admin', component: ProjectComponent, children: [
       {
-        path: 'list', component: ProjectListComponent
+        path: 'list', component: ProjectListComponent, canActivate: [AdminGuard]
       },
       {
-        path: 'create', component: ProjectCreateComponent
+        path: 'create', component: ProjectCreateComponent, canActivate: [AdminGuard]
       },
       {
-        path: 'update', component: ProjectUpdateComponent
+        path: 'update', component: ProjectUpdateComponent, canActivate: [AdminGuard]
       },
       {
         path: 'login', component: LoginComponent

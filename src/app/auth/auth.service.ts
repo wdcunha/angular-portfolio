@@ -25,17 +25,17 @@ export class AuthService {
     });
   }
 
-  async login(email: string, password: string) {
+  async login(email: string, password: string): Promise<void> {
     try {
-      await this.afAuth.auth.signIn.signInWithEmailAndPassword(email, password);
+      await this.afAuth.signInWithEmailAndPassword(email, password);
       this.router.navigate(['admin/list']);
     } catch (e) {
       alert('Error!' + e.message);
     }
   }
 
-  async logout() {
-    await this.afAuth.auth.signOut();
+  async logout(): Promise<void> {
+    await this.afAuth.signOut();
     localStorage.removeItem('user');
     this.router.navigate(['admin/login']);
   }
