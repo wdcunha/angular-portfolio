@@ -1,0 +1,18 @@
+<div>
+  <h1>Policy List</h1>
+  <p>Below is a list of dynamic Policy links</p>
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let policy of policies$ | async; index as i">
+      <div class="thumbnail">
+        <a [routerLink]="['/policy', policy.id]">
+          <div class="caption">
+            <p><b>Policy Number: </b> {{ policy.policyNumber}}</p>
+            <p><b>Policy Amount: </b> {{ policy.policyAmount}}</p>
+            <p><b>Creation Date: </b> {{ policy.creationDate | date: 'short' }}</p>
+            <p><b>Expire Date: </b> {{ policy.expireDate | date: 'short' }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

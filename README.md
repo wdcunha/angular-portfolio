@@ -37,7 +37,21 @@ It is used in routes module, so the [admin routing module](src/app/admin/admin-r
 
 Route Guards return an UrlTree variable which provides the new router state (route) that should be activated, as well a boolean (`Promisse<boolean>` or `Observable<boolean>`). UrlTree is a data structure that represents a parsed URL. 
 
+## Contact and Create project form
 
+[Contact form](src/app/contact/contact.component.html) was created as template-based form. The `#myform = "ngForm"` syntax creates a local template variable that will allow to work with the form object, that is passed as argument in the onSubmit method. In fact, the form was automatically created when was imported the FormsModule in the project. The NgForm object that represents the form which provides a plain JS object that contains the attributes of the form and their values. In this example, it simply print the form value in the console but in a real-world situation, we can use it to send the data to a server via a POST request.
+
+[Create project form](src/app/admin/project-create-component/project-create.component.html) was implemented as a Reactive form example, which demands to import FormsModule and ReactiveFormsModule.
+
+## CRUD in Firebase
+
+For this part it was used partially a little tutorial [angular-9-8-firestore-database-crud-tutorial](https://www.techiediaries.com/angular-firebase/angular-9-8-firestore-database-crud-tutorial/), but it wasn't enough, so [Angular with Firestore](https://www.mode2.com/news/part-two-angular-with-firestore-intro/) was clearer to be implemented.
+
+Timestamp gave some trouble to be shown, so searching for datepipe solution I found some posts about [firebase timestamp at stackoverflow](https://stackoverflow.com/questions/50770723/how-to-convert-the-firebase-timestamp-using-angular-date-pipe/50882402) and the solution was to put timestamp format at the model and use `toDate` in the field at the [policy component](src/app/components/policy/policy.component.html) with datepipe.
+
+Glyphicon is not supported from Bootstrap 4 on. So installing the [ng-bootstrap-icons](https://github.com/biutas/ng-bootstrap-icons#readme) was a solution. It could be font awesome or even angular material, but for this project I decided to keep it simple and focus in firebase methods and operations.
+
+A problem to add policy to firebase happened and the solution that worked was to parse to JSON (stringfy) firstly before calling the add method: `const jsonPol = JSON.parse(JSON.stringify(policy));`. Another question was to use Timestamp, because the format that is created in the Firebase natively, it works well, but when saving (adding) it to Firebase, I couldn't adjust to the same format, so after it was a problem to read because it wasn't recognizied as Timestamp, therefore I changed to Date in the [model](src/app/components/policy.model.ts) for Date type and I send the same type to be added, so this way it is possible to make it compatible to read and write operations.
 
 ## Development server
 

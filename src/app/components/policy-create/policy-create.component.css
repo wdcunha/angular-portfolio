@@ -100,6 +100,7 @@ input[type=submit]{
   color:white;
   border:none;
   padding: 6px 20px;
+  margin-top: 15px;
   font-size:110%;
   border-radius:10px;
   font-family: Rockwell, georgia, serif;

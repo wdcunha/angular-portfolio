@@ -1,1 +1,13 @@
-<p>project-create-component works!</p>
+<h1> Reactive Project Form Example </h1>
+
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+  <input type="text" placeholder="Your full name" formControlName="title">
+  <br/>
+  <input type="email" placeholder="Your email" formControlName="image">
+  <br/>
+  <textarea placeholder="Your message" formControlName="text"></textarea>
+  <br/>
+  <input type="submit" value="Send">
+
+</form>

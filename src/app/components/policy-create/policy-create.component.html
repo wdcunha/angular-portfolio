@@ -1,0 +1,11 @@
+<h1> Create Policy Form </h1>
+
+<form [formGroup]="policyForm" (ngSubmit)="onSubmit()">
+
+  <input type="text" placeholder="Policy number" formControlName="policyNumber">
+  <br/>
+  <input type="email" placeholder="Policy Amount" formControlName="policyAmount">
+  <br/>
+  <input type="submit" value="Send">
+
+</form>

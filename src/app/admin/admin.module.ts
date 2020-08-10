@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {ProjectComponent} from './project/project.component';
 import {ProjectCreateComponent} from './project-create-component/project-create.component';
 import {ProjectListComponent} from './project-list-component/project-list.component';
 import {ProjectUpdateComponent} from './project-update-component/project-update.component';
 import {AdminRoutingModule} from './admin-routing.module';
-import { LoginComponent } from './login/login.component';
-
+import {LoginComponent} from './login/login.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +19,9 @@ import { LoginComponent } from './login/login.component';
   ],
   imports: [
     CommonModule,
-    AdminRoutingModule
+    AdminRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 

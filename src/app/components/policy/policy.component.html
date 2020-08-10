@@ -1,0 +1,10 @@
+<div *ngIf="policy$ | async as policy">
+  <h1 class="first-line">Number: {{ policy.policyNumber }}</h1>
+  <p><b>Id: </b> {{ id }}</p>
+  <p><b>Policy Amount: </b> {{ policy.policyAmount}}</p>
+  <p><b>Creation Date: </b> {{ policy.creationDate | date: 'short' }}</p>
+  <p><b>Expire Date: </b> {{ policy.expireDate | date: 'short' }}</p>
+</div>
+  <a [routerLink]="['/policies']">
+    <bi name="arrow-left-circle-fill" class="big fill-blue"></bi>back
+  </a>
