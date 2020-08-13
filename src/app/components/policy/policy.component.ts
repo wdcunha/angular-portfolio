@@ -24,5 +24,4 @@ export class PolicyComponent implements OnInit {
   ngOnInit(): void {
     this.policy$ = this.policeService.getPolicy(this.id);
   }
-
 }

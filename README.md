@@ -53,6 +53,16 @@ Glyphicon is not supported from Bootstrap 4 on. So installing the [ng-bootstrap-
 
 A problem to add policy to firebase happened and the solution that worked was to parse to JSON (stringfy) firstly before calling the add method: `const jsonPol = JSON.parse(JSON.stringify(policy));`. Another question was to use Timestamp, because the format that is created in the Firebase natively, it works well, but when saving (adding) it to Firebase, I couldn't adjust to the same format, so after it was a problem to read because it wasn't recognizied as Timestamp, therefore I changed to Date in the [model](src/app/components/policy.model.ts) for Date type and I send the same type to be added, so this way it is possible to make it compatible to read and write operations.
 
+## [Firebase Hosting](https://www.mode2.com/news/part-one-angular-with-firebase-hosting/) 
+
+This project was deployed to Firebase using Hosting. First the [Firebase CLI](https://firebase.google.com/docs/cli#windows-npm) was needed and installed with npm command `npm install -g firebase-tools`. Some commands to test and use: firebase login, firebase projects:list, firebase init. One interesting thing was that I didn't need to init the project, I think the reason was the authentication method implemented and used to log in.
+
+In the tutorial was said that `ng build --prod` would ask for setting up the public directory, but actually it didn't do it, but created straight the directory dist/angular-portfolio. So `Firebase deploy --project angular-portfolio-8b182` and then it gave the message:
+
+            Project Console: https://console.firebase.google.com/project/angular-portfolio-8b182/overview
+            Hosting URL: https://angular-portfolio-8b182.web.app
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
