@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 export class Policy {
   id?: string;
   policyNumber?: string;
+  photo?: string;
   creationDate?: Date;
   effectiveDate?: Date;
   expireDate?: Date;

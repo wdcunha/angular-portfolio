@@ -9,9 +9,22 @@ import * as firebase from 'firebase';
 })
 export class PolicyService {
 
+  private imageFileTypes = [
+    'image/apng',
+    'image/bmp',
+    'image/gif',
+    'image/jpeg',
+    'image/png',
+    'image/svg+xml',
+  ];
+
   constructor(
     private angularFirestore: AngularFirestore,
   ) {
+  }
+
+  validateFile(file: File): boolean {
+    return this.imageFileTypes.includes(file.type);
   }
 
   getPolicies(): Observable<any> {

@@ -1,17 +1,33 @@
 <div>
   <h1>Policy List</h1>
   <p>Below is a list of dynamic Policy links</p>
-  <div class="row">
-    <div class="col-sm-4" *ngFor="let policy of policies$ | async; index as i">
-      <div class="thumbnail">
-        <a [routerLink]="['/policy', policy.id]">
-          <div class="caption">
-            <p><b>Policy Number: </b> {{ policy.policyNumber}}</p>
-            <p><b>Policy Amount: </b> {{ policy.policyAmount}}</p>
-            <p><b>Creation Date: </b> {{ policy.creationDate | date: 'short' }}</p>
-            <p><b>Expire Date: </b> {{ policy.expireDate | date: 'short' }}</p>
-          </div>
-        </a>
+
+  <div class="col-md-12" style="margin-bottom: 10px; padding-right: 0; padding-left: 0">
+    <div class="btn-group btn-group-sm" style="margin-right: 20px">
+      <button class="btn btn-default" style="margin-left: 3px" [class.active]="sortBy==='asc'"
+              (click)="loadPolicies('asc', fieldKey.value)">Asc<bi name="arrow-up" class="big fill-blue"></bi></button>
+      <button class="btn btn-default" style="margin-left: 3px" [class.active]="sortBy==='desc'"
+              (click)="loadPolicies('desc', fieldKey.value)">Desc<bi name="arrow-down" class="big fill-blue"></bi></button>
+      <select class="btn btn-group-sm" #fieldKey aria-haspopup="true" aria-expanded="false">
+        <option [value]="'policyNumber'">Number</option>
+        <option [value]="'policyAmount'">Amount</option>
+        <option [value]="'creationDate'" selected="selected">Creation Date</option>
+        <option [value]="'expireDate'">Expire Date</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let policy of visiblePolicies; index as i">
+        <div class="thumbnail">
+          <a [routerLink]="['/policy', policy.id]">
+            <div class="caption">
+              <p><b>Number: </b> {{ policy.policyNumber}}</p>
+              <p><b>Amount: </b> {{ policy.policyAmount}}</p>
+              <p><b>Creation: </b> {{ policy.creationDate | date: 'short' }}</p>
+              <p><b>Expire: </b> {{ policy.expireDate | date: 'short' }}</p>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>

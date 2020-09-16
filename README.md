@@ -49,7 +49,7 @@ For this part it was used partially a little tutorial [angular-9-8-firestore-dat
 
 Timestamp gave some trouble to be shown, so searching for datepipe solution I found some posts about [firebase timestamp at stackoverflow](https://stackoverflow.com/questions/50770723/how-to-convert-the-firebase-timestamp-using-angular-date-pipe/50882402) and the solution was to put timestamp format at the model and use `toDate` in the field at the [policy component](src/app/components/policy/policy.component.html) with datepipe.
 
-Glyphicon is not supported from Bootstrap 4 on. So installing the [ng-bootstrap-icons](https://github.com/biutas/ng-bootstrap-icons#readme) was a solution. It could be font awesome or even angular material, but for this project I decided to keep it simple and focus in firebase methods and operations.
+Glyphicon is not supported from Bootstrap 4 on. So installing the [ng-bootstrap-icons](https://github.com/biutas/ng-bootstrap-icons#readme) was a solution. It could be font awesome or even angular material, but for this project I decided to keep it simple and focus in firebase methods and Angular operations.
 
 A problem to add policy to firebase happened and the solution that worked was to parse to JSON (stringfy) firstly before calling the add method: `const jsonPol = JSON.parse(JSON.stringify(policy));`. Another question was to use Timestamp, because the format that is created in the Firebase natively, it works well, but when saving (adding) it to Firebase, I couldn't adjust to the same format, so after it was a problem to read because it wasn't recognizied as Timestamp, therefore I changed to Date in the [model](src/app/components/policy.model.ts) for Date type and I send the same type to be added, so this way it is possible to make it compatible to read and write operations.
 
@@ -61,6 +61,31 @@ In the tutorial was said that `ng build --prod` would ask for setting up the pub
 
             Project Console: https://console.firebase.google.com/project/angular-portfolio-8b182/overview
             Hosting URL: https://angular-portfolio-8b182.web.app
+
+
+## [Uploading a file](https://indepth.dev/implement-file-upload-with-firebase-storage/)
+
+It was used a tutorial from [indepth.dev](https://indepth.dev/) that implements a way to upload file to Firebase. So some methods like readAsDataURL, onload (receives from Progress<FileReader> that takes from result in which contains file's data as a base64 enconded string) from FileReader were used to treat the images. 
+
+Here was implemented a piece of code to take the user when logged in, and it was put in [policy-create](src/app/components/policy-create/policy-create.component.ts).
+
+I had a great difficulty to find a tutorial to give precise result without error, so I had to mix many of them [angular 7 reactive-forms-validation](https://www.positronx.io/angular-7-reactive-forms-validation-tutorial/), [angular 8 show-image-preview]https://www.positronx.io/angular-8-show-image-preview-with-reactive-forms-tutorial/), [file-upload-with-angular](https://www.codingforentrepreneurs.com/blog/file-upload-with-angular/) and some stackOverFlow off course.
+
+The part of sending file to Firebase Storage was [the tutorial](https://indepth.dev/implement-file-upload-with-firebase-storage/#setting-up-angularfire-storage) of this section, in which AngularFireStorage has all already done, but the upload progress demanded to find tutorials by the web.
+
+I had a big problem to find a solution that works in this project, so it was necessary a mix of pieces of code, cut from some tutorials ([Implement file upload with Firebase Storage](https://indepth.dev/implement-file-upload-with-firebase-storage/), [Upload Multiple Files to Firebase Storage](https://fireship.io/lessons/angular-firebase-storage-uploads-multi/), [UPLOADING AN IMAGE TO FIREBASE](https://dev.to/fayvik/uploading-an-image-to-firebase-cloud-storage-with-angular-2aeh), [How to upload and display image file](https://medium.com/@AnkitMaheshwariIn/how-to-upload-and-display-image-file-in-pwa-angular-project-using-firebase-cloud-storage-and-95763bc83da7), [Angular 10/9 File Upload Tutorial](https://www.techiediaries.com/angular-file-upload-progress-bar/), [Implement file upload with Firebase Storage](https://dev.to/angular/implement-file-upload-with-firebase-storage-in-our-angular-app-the-simple-way-1ofi)).
+
+Another difficulty was about error of permission: `ERROR FirebaseError: Missing or insufficient permissions`, so again I needed to mix some solutions from web: [stackOverFlow (better answer was != null)](https://stackoverflow.com/questions/46590155/firestore-permission-denied-missing-or-insufficient-permissions?rq=1), [Granular permissions - youtube](https://www.youtube.com/watch?v=9sOT5VOflvQ).
+
+Sorting 
+
+
+## Sorting
+
+Sorting was implemented in the [admin routing module](src/app/components/policy-list/policy-list.component.ts) and as usual I had to mix solutions to reach the final result. First I used the solution from [pluralsight - Angular Fundamentals chapter 10](https://app.pluralsight.com/course-player?clipId=cb7b52c0-1247-407b-a132-937845edd096), where it is made filtering and sorting. The tricky part, despite so easy, was to reverse the order (just multiply by -1) and I needed to search and I found in a page [Basic Array Sorting](https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/), that has a method example for dynamic sorting function and other array sorting.
+
+It was put a dropdown to select which field to be used to sort data, so bootstrap [dropdown](https://getbootstrap.com/docs/4.3/components/dropdowns/) was used, but it requires Poper.js to be installed - [stackOverFlow](https://stackoverflow.com/questions/45661863/bootstrap-min-js6-uncaught-error-bootstrap-dropdown-require-popper-js). Another detail was the fact to need to use select tag instead of the way shown in the Bootstrap page and the [template reference variable #](https://angular.io/guide/template-reference-variables) was used
+
 
 
 ## Development server

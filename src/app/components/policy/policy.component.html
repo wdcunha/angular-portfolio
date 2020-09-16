@@ -4,6 +4,11 @@
   <p><b>Policy Amount: </b> {{ policy.policyAmount}}</p>
   <p><b>Creation Date: </b> {{ policy.creationDate | date: 'short' }}</p>
   <p><b>Expire Date: </b> {{ policy.expireDate | date: 'short' }}</p>
+
+  <div class="avatar-preview" *ngIf="policy.photo">
+    <img id="imagePreview" [src]="policy.photo" />
+  </div>
+
 </div>
   <a [routerLink]="['/policies']">
     <bi name="arrow-left-circle-fill" class="big fill-blue"></bi>back

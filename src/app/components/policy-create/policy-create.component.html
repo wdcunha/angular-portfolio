@@ -1,6 +1,21 @@
 <h1> Create Policy Form </h1>
 
-<form [formGroup]="policyForm" (ngSubmit)="onSubmit()">
+<form *ngIf="authService.isLoggedIn" [formGroup]="policyForm" (ngSubmit)="onSubmit()">
+
+  <div class="form-group">
+    <label for="photo">Upload a photo:</label>
+    <input type="file" class="form-control-file" id="photo" accept="image/*"
+           formControlName="photo" (change)="onFileLoad($event.target.files)">
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress form-group" *ngIf="uploadProgress$ > 0">
+    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="uploadProgress$">
+    </div>
+  </div>
+  <div class="avatar-preview" *ngIf="currentInput">
+    <img id="imagePreview" [src]="currentInput" />
+  </div>
 
   <input type="text" placeholder="Policy number" formControlName="policyNumber">
   <br/>
