@@ -9,13 +9,21 @@
   margin-bottom: 0.5rem !important;
 }
 
-button, select {
+button, select, label {
   font-size: 14px !important;
   color: #555;
   margin-bottom: 5px;
 }
 
-button:active {
+.custom-control-label {
+  margin-top: 5px;
+}
+
+.searchLink {
+  margin: 5px 0 0 10px;
+}
+
+button :active {
   background-color: yellow;
 }
 

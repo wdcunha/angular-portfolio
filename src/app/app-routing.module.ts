@@ -14,7 +14,9 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent},
   { path: 'policies', component: PolicyListComponent, canActivate: [AdminGuard]},
   { path: 'policy/:id', component: PolicyComponent, canActivate: [AdminGuard]},
-  { path: 'policy-create', component: PolicyCreateComponent, canActivate: [AdminGuard]}
+  { path: 'policy-create', component: PolicyCreateComponent, canActivate: [AdminGuard]},
+  { path: 'reactive-search', loadChildren: () => import('./reactive-search/reactive-search.module')
+      .then(m => m.ReactiveSearchModule)}
 ];
 
 @NgModule({

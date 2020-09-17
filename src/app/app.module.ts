@@ -18,6 +18,8 @@ import { PolicyCreateComponent } from './components/policy-create/policy-create.
 import { PolicyComponent } from './components/policy/policy.component';
 import {BootstrapIconsModule} from 'ng-bootstrap-icons';
 import {allIcons} from 'ng-bootstrap-icons/icons';
+import { LibSearchComponent } from './components/lib-search/lib-search.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import {allIcons} from 'ng-bootstrap-icons/icons';
     ContactComponent,
     PolicyListComponent,
     PolicyCreateComponent,
-    PolicyComponent
+    PolicyComponent,
+    LibSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import {allIcons} from 'ng-bootstrap-icons/icons';
     AdminModule,
     AngularFireModule.initializeApp(data.firebaseConfig),
     AngularFireAuthModule,
-    BootstrapIconsModule.pick(allIcons)
+    BootstrapIconsModule.pick(allIcons),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

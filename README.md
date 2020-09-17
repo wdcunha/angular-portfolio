@@ -63,6 +63,7 @@ In the tutorial was said that `ng build --prod` would ask for setting up the pub
             Hosting URL: https://angular-portfolio-8b182.web.app
 
 
+
 ## [Uploading a file](https://indepth.dev/implement-file-upload-with-firebase-storage/)
 
 It was used a tutorial from [indepth.dev](https://indepth.dev/) that implements a way to upload file to Firebase. So some methods like readAsDataURL, onload (receives from Progress<FileReader> that takes from result in which contains file's data as a base64 enconded string) from FileReader were used to treat the images. 
@@ -77,15 +78,41 @@ I had a big problem to find a solution that works in this project, so it was nec
 
 Another difficulty was about error of permission: `ERROR FirebaseError: Missing or insufficient permissions`, so again I needed to mix some solutions from web: [stackOverFlow (better answer was != null)](https://stackoverflow.com/questions/46590155/firestore-permission-denied-missing-or-insufficient-permissions?rq=1), [Granular permissions - youtube](https://www.youtube.com/watch?v=9sOT5VOflvQ).
 
-Sorting 
-
-
 ## Sorting
 
 Sorting was implemented in the [admin routing module](src/app/components/policy-list/policy-list.component.ts) and as usual I had to mix solutions to reach the final result. First I used the solution from [pluralsight - Angular Fundamentals chapter 10](https://app.pluralsight.com/course-player?clipId=cb7b52c0-1247-407b-a132-937845edd096), where it is made filtering and sorting. The tricky part, despite so easy, was to reverse the order (just multiply by -1) and I needed to search and I found in a page [Basic Array Sorting](https://www.sitepoint.com/sort-an-array-of-objects-in-javascript/), that has a method example for dynamic sorting function and other array sorting.
 
 It was put a dropdown to select which field to be used to sort data, so bootstrap [dropdown](https://getbootstrap.com/docs/4.3/components/dropdowns/) was used, but it requires Poper.js to be installed - [stackOverFlow](https://stackoverflow.com/questions/45661863/bootstrap-min-js6-uncaught-error-bootstrap-dropdown-require-popper-js). Another detail was the fact to need to use select tag instead of the way shown in the Bootstrap page and the [template reference variable #](https://angular.io/guide/template-reference-variables) was used
 
+## Search
+
+Using the Loiane tuturial [Curso Angular #142: Criando tela de pesquisa](https://www.youtube.com/watch?v=dgVR17Xmn8A&list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G&index=147) it was added a search screen. She used [Bootsnipp](https://bootsnipp.com/snippets/Q0eE1) to base her tutorial in this video, which is a basic page with just search field and the place to show the results, and clicking in the tab HTML in the upper on the screen, there's the code of this example, so she copied and past in the [lib-search.component](src/app/components/lib-search/lib-search.component.html), removing some parts of it (script tag line 9 to 18 that search for a tag name) that is not necessary, because it will be done by Angular in this example. The same was done for CSS code, pasting it in the correspondent file in this project, as well many other adjustments, like padding using percentage, removed onekeyup because it is not necessary. Not to create a whole form, it was created just a partial using FormControl (that comes from the Angular) by a variable, being needed to import ReactiveFormsModule in the ReactiveSearchModule file, in order to directives work in the html files. An important thing is to put the attribute [formControl] within the input tag to send data to the variable queryField created.
+
+For this, a new module was created too using the comand `ng g m reactive-search --routing` [reactive-search.module](src/app/reactive-search/reactive-search.module.ts). So a path was added to app-routing for reactive-search pointing as a loadChildren, and created a new component called [lib-search](src/app/components/lib-search/lib-search.component.ts). In the [reactive-search-routing.module](src/app/reactive-search/reactive-search-routing.module.ts) was created a path for the new component lib-search.
+
+In the second video, [Passando Parâmetros na URL](https://youtu.be/eJf_-pv6C34?list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G), something interesting was to use [api cdnjs](https://cdnjs.com/api) that has some methods that was used in her tutorial. An example given was how to send parameters by URL to retrieve data in the search: `https://api.cdnjs.com/libraries?fields=name,description,version,homepage`, allowing us to custom it and put as we want, putting for sample and & at the end of the last URL and pass a term to be searched: `https://api.cdnjs.com/libraries?fields=name,description,version,homepage&search=angular`. If the results of the search is collapsed, we can see the total of lines retrieved. So it was implemented code to receive this information, then an observable was created in a variable using any because no type was created, but it could have be done. An important detail is that the assignment of the result$ needs to be treated by a pipe to not get an error of `Uncaught (in promise): NullInjectorError`. So inside this pipe was used tap([`it is  a pipeable operator that takes an input observable perform some action and returns the same input observable`](https://stackoverflow.com/questions/61295224/what-is-the-difference-between-tap-and-map-in-rxjs#:~:text=Difference%20between%20map%20and%20tap%3A&text=The%20tap%20operator%20on%20another,returns%20the%20same%20input%20observable.&text=Tap%20should%20be%20Used%20for,Data%20in%20the%20%22pipe%22.)) to get the total number of registers retrieved, and map(`it is also a pipeable operator that takes an input observable, performs some manipulation on it and returns a new manipulated observable`) to get the main data. HttpClient was used to reach api cdnjs even within the same file lib-search just for didactic purpose, but the correct is to implement it in a service propperly.
+
+A less risk way to treat a dynamic URL parameters is using an object as parameter and Angular mount it for us without being necessary to use symbols like ? and &, which it is good to avoid forgetfulness. So changing for this sintax `this.SEARCH_URL, { params }`, correspond to this `?fields=name,description,version,homepage&search=`. A practical, convinient and cool way to code in a safe manner too. To check if it works, just go to the development tool, Network, choosing XHR that is about requests, we can see that the URL is assembled the same way (`libraries?search=angular&fields=name,description,version,homepage`).
+
+But if there's need to work with dynamic way to assembly the parameters, in this case use HttpParams, that provides a set method to allow passing the pararameter we need. But this object is immutable, so just using set is not enough, then assigning is the solution: `params = params.set('search', value);`. If there's more values to be set, it can be used append after setting the first value. This way works as the previous one, but in a dynamic manner. 
+
+In the third video of the serie of search, [Pesquisa/Busca com Programação Reativa](https://www.youtube.com/watch?v=IrgKtm3e8Yc&list=PLGxZ4Rq3BOBoSRcKWEdQACbUCNWLczg2G&index=149), a search while the user type in the field was implemented. So the call is made inside the ngOnInit instead of doing by the onSearch method manually created by her in the video, so allowing being called always the user types a new value in the input field, listening which are the value changes. For that, valueChanges property (returns an Observable) from Forms was applied because it is return each change that happens in the input element. In order to keep on using the pipe async, let's keep the result$. As it is an Observable, a pipe can be used to do all transformations needed. To not get error, the variable was took out for testing purpose and added at the end, and used a subscribe to see it working.
+
+But if each type the user does makes an http call, like many spaces, it will wast requests, so put some restriction is necessary to consume resources smartly. The first one is a map to cut spaces with trim (`map(res => res.trim())`). But it continues counting and making requests, so it is not good. For that, distinctUntilChanged gives distinct values util the value is modified, ignoring repeated values, sending just when it changes.
+
+Defining a number of a minimum of characters, like just when it is greater than 1 that the program can search, so filter was used (`filter(res => res.length > 1)`), avoiding like this to send request for just one letter, but for many cases is good to define a min of 3 or 4 letters before sending a request.
+
+Another important thing to be considered is set a slice of time to send what the user typed not to do request for each letter, which `debounceTime(200)` is a good option, being 200 a 300 milliseconds enough. This is a good measure to avoid sending unnecessary requests to the server. 
+
+SwitchMap was used to avoid to nest inside subscribe, it is used to take the value receive from the process above of the other operators and it transform in another Observable, and it cancel previous requests. As the interest is to obtain the result from the last request, any previous request can be canceled and focus to receive the last one. Inside it we declare an object of params: 
+            ```
+                    switchMap(value => this.http.get(this.SEARCH_URL, {
+                      params: {
+                        search: value,
+                        fields: this.fieldsParam
+                      }
+            ```
+But there's yet total (number of register) and results to be caught from the api. So that, the same way as used in the onSearch, tap assign total and map to results, for the map there's no difference, but it could be put inside an object followed by a return, which is not necessary.
 
 
 ## Development server

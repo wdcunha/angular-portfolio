@@ -60,10 +60,8 @@ export class PolicyListComponent implements OnInit {
 
 function sortByDate(position = 'desc', key: string): (a, b) => (0 | any) {
 
-  console.log(key);
-
   return function innerSort(a, b): any {
-    console.log(a[key]);
+    // console.log(a[key]);
 
     if (!a[key] || !b[key]) {
       return 0;

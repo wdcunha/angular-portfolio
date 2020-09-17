@@ -8,12 +8,18 @@
               (click)="loadPolicies('asc', fieldKey.value)">Asc<bi name="arrow-up" class="big fill-blue"></bi></button>
       <button class="btn btn-default" style="margin-left: 3px" [class.active]="sortBy==='desc'"
               (click)="loadPolicies('desc', fieldKey.value)">Desc<bi name="arrow-down" class="big fill-blue"></bi></button>
-      <select class="btn btn-group-sm" #fieldKey aria-haspopup="true" aria-expanded="false">
-        <option [value]="'policyNumber'">Number</option>
-        <option [value]="'policyAmount'">Amount</option>
-        <option [value]="'creationDate'" selected="selected">Creation Date</option>
-        <option [value]="'expireDate'">Expire Date</option>
+     <label class="custom-control-label" for="fieldKey">Ordenar por:</label>
+      <select class="btn btn-group-sm" id="fieldKey" #fieldKey aria-haspopup="true" aria-expanded="false">
+        <option [ngValue]="'policyNumber'">Number</option>
+        <option [ngValue]="'policyAmount'">Amount</option>
+        <option [ngValue]="'creationDate'" selected="selected">Creation Date</option>
+        <option [ngValue]="'expireDate'">Expire Date</option>
       </select>
+
+      <a class="searchLink" [routerLink]="['/reactive-search']">
+        | Search |
+      </a>
+
     </div>
 
     <div class="row">
