@@ -1,3 +1,31 @@
+.policy-list {
+  padding-top: 3%;
+}
+
+.table-controls {
+  margin-bottom: 15px;
+}
+
+button, select, label {
+  font-size: 14px !important;
+  margin-bottom: 5px;
+}
+
+.sort {
+  min-width: 68px;
+  padding-left: 0;
+  border-left: 0;
+}
+
+.font-style {
+  color: #690606;
+}
+
+.select-label {
+  padding-top: 8px;
+  min-width: 80px;
+}
+
 .thumbnail {
   padding: 5px 0 0 7px;
   border-style: solid;
@@ -9,21 +37,28 @@
   margin-bottom: 0.5rem !important;
 }
 
-button, select, label {
-  font-size: 14px !important;
-  color: #555;
-  margin-bottom: 5px;
-}
-
-.custom-control-label {
-  margin-top: 5px;
-}
-
-.searchLink {
-  margin: 5px 0 0 10px;
-}
-
 button :active {
   background-color: yellow;
+}
+
+.results {
+  padding-top: 10px;
+  font-family: 'Lucida Console', fantasy;
+  font-size: 12px;
+}
+
+.search-input {
+  margin-left: 13px;
+  min-width: 370px;
+
+}
+
+.date-picker {
+  min-width: 200px;
+  margin-left: 10px;
+}
+
+.btn-search {
+  margin-left: 50px;
 }
 

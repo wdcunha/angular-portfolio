@@ -19,13 +19,13 @@ export class LibSearchComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.queryField.valueChanges
+    this.results$ = this.queryField.valueChanges
       .pipe(
         map(res => res.trim()),
-        filter(res => res.length > 1),
+        filter(res => res.length > 2),
         debounceTime(200),
         distinctUntilChanged(),
-        // tap(res => console.log(res)),
+        tap(res => console.log(res)),
         switchMap(value => this.http.get(this.SEARCH_URL, {
           params: {
             search: value,
@@ -33,8 +33,8 @@ export class LibSearchComponent implements OnInit {
           }
         })),
         tap((res: any) => this.total = res.total),
-        map((res: any) => res.results)
-      ).subscribe();
+        map((res: any) => res.results),
+      );
   }
 
   onSearch(): void {

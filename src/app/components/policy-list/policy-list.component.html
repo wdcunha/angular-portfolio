@@ -1,25 +1,77 @@
-<div>
+<div class="policy-list">
   <h1>Policy List</h1>
   <p>Below is a list of dynamic Policy links</p>
 
-  <div class="col-md-12" style="margin-bottom: 10px; padding-right: 0; padding-left: 0">
-    <div class="btn-group btn-group-sm" style="margin-right: 20px">
-      <button class="btn btn-default" style="margin-left: 3px" [class.active]="sortBy==='asc'"
-              (click)="loadPolicies('asc', fieldKey.value)">Asc<bi name="arrow-up" class="big fill-blue"></bi></button>
-      <button class="btn btn-default" style="margin-left: 3px" [class.active]="sortBy==='desc'"
-              (click)="loadPolicies('desc', fieldKey.value)">Desc<bi name="arrow-down" class="big fill-blue"></bi></button>
-     <label class="custom-control-label" for="fieldKey">Ordenar por:</label>
-      <select class="btn btn-group-sm" id="fieldKey" #fieldKey aria-haspopup="true" aria-expanded="false">
-        <option [ngValue]="'policyNumber'">Number</option>
-        <option [ngValue]="'policyAmount'">Amount</option>
-        <option [ngValue]="'creationDate'" selected="selected">Creation Date</option>
-        <option [ngValue]="'expireDate'">Expire Date</option>
-      </select>
-
-      <a class="searchLink" [routerLink]="['/reactive-search']">
-        | Search |
-      </a>
-
+  <details>
+    <summary>Additional</summary>
+    <ul>
+      <li>test</li>
+      <li>test</li>
+      <li>test</li>
+    </ul>
+  </details>
+  <div class="col-md-12">
+    <div class="row table-controls">
+      <div class="btn-group btn-group-sm">
+        <button class="btn btn-default sort font-style" [class.active]="sortBy==='asc'"
+                (click)="loadPolicies('asc', fieldKey.value)">Asc
+          <bi name="arrow-up" class="big fill-blue"></bi>
+        </button>
+        <button class="btn btn-default sort font-style" [class.active]="sortBy==='desc'"
+                (click)="loadPolicies('desc', fieldKey.value)">Desc
+          <bi name="arrow-down" class="big fill-blue"></bi>
+        </button>
+        <label class="select-label" for="fieldKey">Ordenar por:</label>
+        <select class="btn btn-group-sm font-style" id="fieldKey"
+                #fieldKey aria-haspopup="true" aria-expanded="false"
+                (change)="fieldKey.value === 'policyNumber' || fieldKey.value === 'policyAmount' ? inputText : datePicker"
+        >
+          <option [value]="'policyNumber'" selected="selected">Number</option>
+          <option [value]="'policyAmount'">Amount</option>
+          <option [value]="'creationDate'">Creation Date</option>
+          <option [value]="'expireDate'">Expire Date</option>
+        </select>
+        <div *ngIf="fieldKey.value === 'policyNumber' || fieldKey.value === 'policyAmount';
+        then inputText else datePicker"></div>
+        <ng-template #inputText>
+          <input
+            class="form-control search-input"
+            id="myInput"
+            placeholder="Type the term you want to find in the list below"
+            type="text"
+            [formControl]="queryField"
+          >
+        </ng-template>
+        <ng-template #datePicker class="search-input">
+          <div class="p-field p-col-12 date-picker">
+            <p-calendar [(ngModel)]="date3" dateFormat="dd/mm/yy" [showIcon]="true" inputId="calendarIcon"></p-calendar>
+          </div>
+          {{ date3 | json }}
+        </ng-template>
+        <ng-template #datePickerNgb class="search-input">
+          <form class="form-inline  date-picker">
+            <div class="form-group">
+              <div class="input-group">
+                <input class="form-control date-picker" placeholder="yyyy-mm-dd"
+                       name="dp" [(ngModel)]="datePickerCmp" ngbDatepicker #d="ngbDatepicker">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                </div>
+              </div>
+            </div>
+          </form>
+          {{ datePickerCmp | json }}
+        </ng-template>
+        <div class="col-auto">
+          <button class="btn btn-lg btn-secondary btn-search" (click)="onSearch(fieldKey.value)">Search</button>
+        </div>
+        <div class="col-auto">
+          <button class="btn btn-lg btn-outline-warning" (click)="clearForm()">Clear</button>
+        </div>
+        <div class="col-sm-2 results">
+          {{visiblePolicies.length + ' results'}}
+        </div>
+      </div>
     </div>
 
     <div class="row">

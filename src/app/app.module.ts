@@ -20,6 +20,10 @@ import {BootstrapIconsModule} from 'ng-bootstrap-icons';
 import {allIcons} from 'ng-bootstrap-icons/icons';
 import { LibSearchComponent } from './components/lib-search/lib-search.component';
 import {HttpClientModule} from '@angular/common/http';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbdDatepickerAdapterComponent } from './components/datepicker-adapter/ngbd-datepicker-adapter.component';
+import {CalendarModule} from 'primeng/calendar';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -32,18 +36,22 @@ import {HttpClientModule} from '@angular/common/http';
     PolicyListComponent,
     PolicyCreateComponent,
     PolicyComponent,
-    LibSearchComponent
+    LibSearchComponent,
+    NgbdDatepickerAdapterComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
+    NgbModule,
     ReactiveFormsModule,
     AppRoutingModule,
     AdminModule,
     AngularFireModule.initializeApp(data.firebaseConfig),
     AngularFireAuthModule,
     BootstrapIconsModule.pick(allIcons),
-    HttpClientModule
+    HttpClientModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
